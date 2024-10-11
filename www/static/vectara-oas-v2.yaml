@@ -41,7 +41,7 @@ tags:
   - name: Upload
     description: Upload files to a corpus for automatic parsing, text extraction, chunking, and indexing
   - name: Index
-    description: Index and manage core and structured documents for efficient search and retrieval
+    description: Index and manage both core and structured documents to enable efficient search and retrieval
   - name: Corpora
     description: Create, manage, and update corpora and their associated settings
   - name: Documents
@@ -71,8 +71,8 @@ paths:
     post:
       summary: Create a corpus
       description: |
-        Create a corpus, which is a container to store documents and associated metadata. This is where you 
-        create the unique `corpus_key` that identifies the corpus. The `corpus_key` can be custom-defined 
+        Create a corpus, which is a container to store documents and associated metadata. Here, you 
+        define the unique `corpus_key` that identifies the corpus. The `corpus_key` can be custom-defined 
         following your preferred naming convention, allowing you to easily manage the corpus's data and 
         reference it in queries. For more information, see 
         [Corpus Key Definition](https://docs.vectara.com/docs/api-reference/search-apis/search#corpus-key-definition).
@@ -109,8 +109,8 @@ paths:
     get:
       summary: List corpora
       description: |
-        List corpora in the account. The corpus objects that are returned are less
-        detailed than the direct corpus retrieval operation.
+        List corpora in the account. The returned corpus objects contain less
+        detail compared to those retrieved the direct corpus retrieval operation.
       operationId: listCorpora
       tags:
         - Corpora
@@ -158,7 +158,7 @@ paths:
         - Corpora
       summary: Retrieve metadata about a corpus
       description: |
-        Get metadata about a corpus. This operation is not a method of searching a corpus. 
+        Get metadata about a corpus. This operation does not search the corpus contents. 
         Specify the `corpus_key` to identify the corpus whose metadata you want to 
         retrieve. The `corpus_key` is created when the corpus is set up, either through
         the Vectara Console UI or the Create Corpus API. For more information, 
@@ -197,7 +197,7 @@ paths:
         - Corpora
       summary: Delete a corpus and all its data
       description: |
-        Delete a corpus and all the data that it contains. The `corpus_key` uniquely identifies 
+        Permanently delete a corpus and all its associated data. The `corpus_key` uniquely identifies 
         the corpus. For more information, see [Corpus Key Definition](https://docs.vectara.com/docs/api-reference/search-apis/search#corpus-key-definition).
       operationId: deleteCorpus
       parameters:
@@ -205,7 +205,7 @@ paths:
         - $ref: '#/components/parameters/RequestTimeoutMillis'
         - in: path
           name: corpus_key
-          description: The unique key identifying the corpus to delete
+          description: The unique key identifying the corpus to delete.
           required: true
           schema:
             $ref: '#/components/schemas/CorpusKey'
@@ -233,7 +233,7 @@ paths:
         manage data availability without deleting the corpus, which is useful for 
         maintenance and security purposes. The `corpus_key` uniquely identifies the corpus. 
         For more information, see [Corpus Key Definition](https://docs.vectara.com/docs/api-reference/search-apis/search#corpus-key-definition). 
-        Update the name and description of a corpus dynamically to help keep your data 
+        Consider updating the name and description of a corpus dynamically to help keep your data 
         aligned with changing business needs.
       operationId: updateCorpus
       parameters:
@@ -309,9 +309,9 @@ paths:
         - Corpora
       summary: Replace the filter attributes of a corpus
       description: |
-        Replace the filter attributes of a corpus. This does not happen immediately, but
-        instead creates a job and will complete when that job completes. Until that
-        job completes, using new filter attributes will not work.
+        Replace the filter attributes of a corpus. This does not happen immediately, as
+        this operation creates a job that completes asynchronously. These new filter 
+        attributes will not work until the job completes.
 
         You can monitor the status of the filter change using the returned job ID. The 
         `corpus_key` uniquely identifies the corpus. For more information, see 
@@ -322,7 +322,7 @@ paths:
         - $ref: '#/components/parameters/RequestTimeoutMillis'
         - in: path
           name: corpus_key
-          description: Key of the corpus to have filters replaced.
+          description: The unique key identifying the corpus having its filters replaced.
           required: true
           schema:
             $ref: '#/components/schemas/CorpusKey'
@@ -339,7 +339,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReplaceFilterAttributesResponse'
         '403':
-          description: Permissions don't allow replacing filter attributes.
+          description: Permissions do not allow replacing filter attributes.
           content:
             application/json:
               schema:
@@ -382,7 +382,7 @@ paths:
             type: string
         - in: query
           name: limit
-          description: Maximum number of results to return.
+          description: The maximum number of results to return.
           required: false
           schema:
             type: integer
@@ -390,7 +390,7 @@ paths:
             minimum: 1
         - in: query
           name: offset
-          description: Position from which to start in the result set.
+          description: The position from which to start in the result set.
           required: false
           schema:
             type: integer
@@ -426,7 +426,7 @@ paths:
         - Queries
       summary: Advanced Single Corpus Query
       description: |
-        Query a specific corpus and find relevant results, highlight relevant snippets, and use Retrieval Augmented Generation:
+        Perform an advanced query on a specific corpus to find relevant results, highlight relevant snippets, and use Retrieval Augmented Generation:
 
         * Specify the unique `corpus_key` identifying the corpus to query. The `corpus_key` is [created in the Vectara Console UI](https://docs.vectara.com/docs/console-ui/creating-a-corpus) or the [Create Corpus API definition](https://docs.vectara.com/docs/api-reference/admin-apis/create-corpus). When creating a new corpus, you have the option to assign a custom `corpus_key` following your preferred naming convention. This key serves as a unique identifier for the corpus, allowing it to be referenced in search requests. For more information, see [Corpus Key Definition](https://docs.vectara.com/docs/api-reference/search-apis/search#corpus-key-definition).
         * Customize your search by specifying the query text (`query`), pagination details (`offset` and `limit`), and metadata filters (`metadata_filter`) to tailor your search results. [Learn more](https://docs.vectara.com/docs/api-reference/search-apis/search#query-definition)
@@ -487,7 +487,7 @@ paths:
         - Queries
       summary: Multiple Corpora Query
       description: |
-        Perform a multipurpose query to retrieve relevant information from one or more corpora and generate a response using Retrieval Augmented Generation (RAG).
+        Perform a multipurpose query across to retrieve relevant information from one or more corpora and generate a response using Retrieval Augmented Generation (RAG).
 
         * Specify the unique `corpus_key` identifying the corpus to query. The `corpus_key` is [created in the Vectara Console UI](https://docs.vectara.com/docs/console-ui/creating-a-corpus) or the [Create Corpus API definition](https://docs.vectara.com/docs/api-reference/admin-apis/create-corpus). When creating a new corpus, you have the option to assign a custom `corpus_key` following your preferred naming convention. This key serves as a unique identifier for the corpus, allowing it to be referenced in search requests. For more information, see [Corpus Key Definition](https://docs.vectara.com/docs/api-reference/search-apis/search#corpus-key-definition).
         * Customize your search by specifying the query text (`query`), pagination details (`offset` and `limit`), and metadata filters (`metadata_filter`) to tailor your search results. [Learn more](https://docs.vectara.com/docs/api-reference/search-apis/search#query-definition)
@@ -542,8 +542,8 @@ paths:
         - Upload
       summary: Upload a file to the corpus
       description: |
-        Upload files such as PDFs and Word Documents. Vectara will attempt to automatically extract text and any metadata.
-        The File Upload endpoint request expects a `multipart/form-data` request containing the following parts:
+        Upload files such as PDFs and Word Documents for automatic text extraction and metadata parsing.
+        The request expects a `multipart/form-data` format containing the following parts:
         * `metadata` - (Optional) Specifies a JSON object representing any additional metadata to be associated with the extracted document. For example, `'metadata={"key": "value"};type=application/json'`
         * `file` - Specifies the file that you want to upload.
         * `filename` - Specified as part of the file field with the file name that you want to associate with the uploaded file. For a curl example, use the following syntax: `'file=@/path/to/file/file.pdf;filename=desired_filename.pdf'`
@@ -606,8 +606,17 @@ paths:
         - Index
       summary: Add a document to a corpus
       description: |
-        Add a document to a corpus. You can add documents that are either in a typical structured format,
-        or in a format that explicitly specifies each document part.  Each part becomes a separate search result.
+        Add a document to a corpus. This endpoint supports two document formats, structured and core.
+
+        * **Structured** documents have a more conventional structure that provide document sections
+        and parts in a format created by Vectara's proprietary strategy automatically. You provide 
+        a logical document structure, and Vectara handles the partitioning.
+        * **Core** documents differ in that they follow an advanced, granular structure that 
+        explicitly defines each document part in an array. Each part becomes a distinct, 
+        searchable item in query results. You have precise control over the document structure 
+        and content.
+
+        For more details, see [Indexing](https://docs.vectara.com/docs/learn/select-ideal-indexing-api). 
       operationId: createCorpusDocument
       parameters:
         - $ref: '#/components/parameters/RequestTimeout'
@@ -652,6 +661,10 @@ paths:
       tags:
         - Documents
       summary: List the documents in the corpus
+      description: | 
+        Retrieve a list of documents stored in a specifi corpus. This endpoint 
+        provides an overview of document metadata without returning the full content of 
+        each document.
       operationId: listCorpusDocuments
       parameters:
         - $ref: '#/components/parameters/RequestTimeout'
@@ -710,6 +723,9 @@ paths:
       tags:
         - Documents
       summary: Delete a document
+      description: |
+        Permanently delete a document identified by its unique `document_id` from a specific 
+        corpus. This operation cannot be undone, so use it with caution.
       operationId: deleteCorpusDocument
       parameters:
         - $ref: '#/components/parameters/RequestTimeout'
@@ -723,8 +739,8 @@ paths:
         - in: path
           name: document_id
           description: |
-            The Document ID of the document to delete.
-            The `document_id` must be percent encoded.
+            The document ID of the document to delete.
+            This `document_id` must be percent encoded.
           required: true
           schema:
             type: string
@@ -747,6 +763,9 @@ paths:
       tags:
         - Documents
       summary: Retrieve a document
+      description: |
+        Retrieve the content and metadata of a specific document, identified by its 
+        unique `document_id` from a specific corpus.
       operationId: getCorpusDocument
       parameters:
         - $ref: '#/components/parameters/RequestTimeout'
@@ -760,8 +779,8 @@ paths:
         - in: path
           name: document_id
           description: |
-            The Document ID of the document to retrieve.
-            The `document_id` must be percent encoded.
+            The document ID of the document to retrieve.
+            This `document_id` must be percent encoded.
           required: true
           schema:
             type: string
@@ -1521,7 +1540,7 @@ paths:
         - Users
       summary: Get a user
       description: |
-        Get a user and view details like thei email, username, and associated roles.
+        Get a user and view details like the email, username, and associated roles.
       operationId: getUser
       parameters:
         - $ref: '#/components/parameters/RequestTimeout'
@@ -1765,7 +1784,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
         '403':
-          description: Permissions do not allow getting this API keys.
+          description: Permissions do not allow getting this API key.
           content:
             application/json:
               schema:
@@ -1798,7 +1817,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKey'
         '403':
-          description: Permissions do not allow getting this API keys.
+          description: Permissions do not allow getting this API key.
           content:
             application/json:
               schema:
@@ -1822,7 +1841,7 @@ paths:
         '204':
           description: The API key was deleted.
         '403':
-          description: Permissions do not allow deleting this API keys.
+          description: Permissions do not allow deleting this API key.
           content:
             application/json:
               schema:
@@ -2367,7 +2386,7 @@ components:
               * The LLM used.
               * `model_parameter`s such as temperature.
              
-            All of these properties except the model can be overriden by setting them in this
+            All of these properties except the model can be overridden by setting them in this
             object. Even when a `prompt_template` is set, the `generation_preset_name` is used to set 
             the model used.
 
@@ -2409,7 +2428,7 @@ components:
             ]
         prompt_text:
           description: |
-            This property is deprecated in favor clearer naming. Use `prompt_template`. This property will be
+            This property is deprecated in favor of clearer naming. Use `prompt_template`. This property will be
             ignored if `prompt_template` is set.
           type: string
           example: |
@@ -2578,10 +2597,10 @@ components:
           $ref: '#/components/schemas/CustomDimensions'
         metadata_filter:
           description: |
-            The filter string to narrow the search to according to metadata attributes. The query against this
-            corpus will be confined to document parts that match the `metadata_filter`. Only metadata
-            set as `filter_attributes` on the corpus can be filtered. Filter syntax is similiar to
-            a SQL where clause. See [metadata filters documentation](https://docs.vectara.com/docs/learn/metadata-search-filtering/filter-overview)
+            The filter string used to narrow the search based on metadata attributes. The query against this
+            corpus will be confined to document parts that match the `metadata_filter`. Only metadata fields
+            set as `filter_attributes` on the corpus can be filtered. Filter syntax is similar to
+            a SQL WHERE clause. See [metadata filters documentation](https://docs.vectara.com/docs/learn/metadata-search-filtering/filter-overview)
             for more information.
           type: string
           example: "doc.title = 'Charlotte''s Web'"
@@ -2614,9 +2633,9 @@ components:
     SearchReranker:
       type: object
       description: |
-        Rerank results of the search. Rerankers are very powerful tools to better order search results.
+        Rerank results of the search. Rerankers are very powerful tools to improve the order of search results.
         By default the search will use the most powerful reranker available to the customer's plan.
-        To disable reranking set the reranker `type` to `"none"`.
+        To disable reranking, set the reranker `type` to `"none"`.
       discriminator:
         propertyName: type
         mapping:
@@ -2637,7 +2656,7 @@ components:
       properties:
         type:
           description: |
-            When type is `customer_reranker`, you can specify the `reranker_name` of a reranker. `reranker_id` is deprecated.
+            When the type is `customer_reranker`, you can specify the `reranker_name` of a reranker. `reranker_id` is deprecated.
             The retrieval engine will then rerank results using that reranker.
           type: string
           default: customer_reranker
@@ -2734,7 +2753,7 @@ components:
         type:
           description: |
             When the type is `mmr`, you can specify the `diversity_bias`, and the
-            the retrieval engine will use the MMR reranker.
+            retrieval engine will use the MMR reranker.
           type: string
           default: mmr
         diversity_bias:
@@ -3035,11 +3054,11 @@ components:
       description: |
         Creating a document using this endpoint can take multiple forms depending on how much
         control of the resulting document parts you desire. You can create a document
-        with natural structure, and Vectara will use it's proprietary strategy to create document parts.
+        with natural structure, and Vectara will use its proprietary strategy to create document parts.
 
         Otherwise, you can create a document with all the document parts explicitly specified.
 
-        A document part is the a search result item in search and retrieval augmented generation endpoints.
+        A document part is the search result item in search and Retrieval Augmented Generation endpoints.
       type: object
       discriminator:
         propertyName: type
@@ -3056,7 +3075,7 @@ components:
       type: object
       properties:
         id:
-          description: The document ID, must be unique within the corpus.
+          description: The document ID must be unique within the corpus.
           type: string
         type:
           description: |
@@ -3126,7 +3145,7 @@ components:
       type: object
       properties:
         id:
-          description: The document ID, must be unique within the corpus.
+          description: The document ID must be unique within the corpus.
           type: string
           example: my-doc-id
         type:
@@ -3134,13 +3153,13 @@ components:
             When the type of the indexed document is `core` the rest of
             the object is expected to follow this schema. This schema allows
             precise specification of document chunks that get directly translated
-            to retrieval search results.
+            to retrieve search results.
           default: core
           type: string
         metadata:
           description: |
             Arbitrary object of document level metadata. Properties of this object
-            can be used by document filter if defined as a corpus filter attribute.
+            can be used by document filters if defined as a corpus filter attribute.
           type: object
           properties: {}
           additionalProperties: true
@@ -3318,7 +3337,7 @@ components:
     GenerationPreset:
       description: |
         Bundle of default values used when calling generation. All values except
-        model name can be overriden at generation time.
+        model name can be overridden at generation time.
       type: object
       properties:
         name:
@@ -3402,7 +3421,7 @@ components:
       description: Parameters to control chat behavior.
       properties:
         store:
-          description: Indicates whether to store chat message and response message.
+          description: Indicates whether to store chat messages and response messages.
           type: boolean
           default: true
     ChatFullResponse:
@@ -3529,13 +3548,13 @@ components:
         query:
           description: The query made to produce this turn.
           type: string
-          example: How do a turn this widget?
+          example: How do you turn this widget?
         answer:
           description: The response to the query.
           type: string
           example: The widget turns counter clockwise.
         enabled:
-          description: Indicates whether the turn is enabled and shown in futures turns of the chat.
+          description: Indicates whether the turn is enabled and shown in future turns of the chat.
           type: boolean
           example: true
         created_at:
