@@ -61,6 +61,43 @@ use the API.
       - Parameters with default values become optional in the schema
       - Return a **JSON-serializable dictionary**
    :::
+   Response:
+   <CodePanel
+     title="Schema Discovery Response"
+     layout="stacked"
+     snippets={[
+       {
+         language: "json",
+         code: `{
+      "id": "tcf_123",
+      "type": "lambda",
+      "name": "customer_score_calculator",
+      "description": "Calculates a customer score based on order history and revenue",
+      "enabled": true,
+      "function_definition": {
+        "language": "python",
+        "language_version": "3.11",
+        "code": "def process(order_count: int, total_revenue: float, days_active: int = 1) -> dict:...",
+        "validation_status": "valid",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "order_count": {"type": "integer"},
+            "total_revenue": {"type": "number"},
+            "days_active": {"type": "integer"}
+          },
+          "required": ["order_count", "total_revenue"],
+          "additionalProperties": false
+        },
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }`
+       }
+     ]}
+   /> 
 3. Create the Lambda Tool with the API.  
     <CodePanel
       title="Create Lambda Tool Request"
