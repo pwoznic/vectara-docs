@@ -234,6 +234,7 @@ const sidebars: SidebarsConfig = {
         "agents/mcp",
         "agents/agents",
         "agents/tools",
+        "agents/lambda-tools",
         "agents/instructions",
         "agents/sessions",
       ],
