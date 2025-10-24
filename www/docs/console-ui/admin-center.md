@@ -28,11 +28,11 @@ Center, tailored to the needs of Vectara administrators.
   ensuring secure access control.
 * **Corpora management**: View, edit, and delete corpora within a customer account to 
   optimize storage and performance.
-* **Model management**: Manage available LLMs for the platform.
+* **LLM management**: Manage available LLMs for the platform.
 * **Text encoder management**: Manage available text encoders for the platform.
 
 
-## Admin Dashboard Overview
+## Admin Center dashboard overview
 
 The **Admin Dashboard** serves as the central hub for monitoring the Vectara 
 instance, providing a snapshot of system health, usage metrics, and account 
@@ -47,12 +47,12 @@ data-driven decisions that enhance platform reliability and boost customer
 satisfaction by ensuring consistent performance.
 
 
-### Dashboard Actions
+### Dashboard actions
 
 * Click **View tenants** to see a list of all tenants. You can also view total 
   queries or indexing requests across tenants.
 
-## Manage Tenants
+## Manage tenants
 
 **Tenant management** enables administrators to view high-level data about the tenant 
 like ID, name, description.
@@ -63,57 +63,57 @@ like ID, name, description.
   constraints.
 
 
-### Tenant Actions
+### Tenant actions
 
 * Filter tenants by ID or status using the dashboard filters.
 * Use the Actions column to View Users or Manage Quotas for each tenant.
 * Launch the Manage Quotas model to update corpora or storage quotas.
 
 
-## Manage Users
+## Manage users
 
 **User and access management** provides tools to oversee users within a specific 
 tenant account, displaying details like ID, email, account ID, role, status, 
 last login, queries, data ingestion, storage, and usage of standard and gpt-4.
 
-### Manage Corpora
+### Manage Ccorpora
 
 **Corpora management** enables administrators to view and manage corpora within 
 a specific customer account, providing details like key, name, description, 
 type, status, and creation date.
 
-### Corpora Actions
+### Corpora actions
 
 * Rebuild a corpus.
 
 
-## Model Management
+## LLM management
 
-**Model management** enables administrators to manage custom LLMs globally, displaying 
+**LLM management** enables administrators to manage custom LLMs globally, displaying 
 details like ID, model name, description, and whether or not it's enabled. 
 Registered models are available to all accounts, ensuring consistent functionality.
 
-#### Tasks and Goals
+#### Tasks and goals
 
 * **View model parameters**: Ensure proper integration by listing model parameters.  
 Reviewing a Llama 3.3 model with an api.example.com endpoint supports advanced 
 features, increasing customer value through enhanced platform capabilities.
 
 
-### Model Actions
+### LLM actions
 
 * Click **Add model** for new registrations.
 * Enable/disable or edit models from the **Action** column.
 
-## Add Model
+## Add LLM
 
-The **Add model** section provides a form to register new custom models for global use, 
+The **Add LLM** section provides a form to register new custom models for global use, 
 capturing details like name, description, API endpoint, and API key (partially masked 
 for security). This ensures secure and centralized model integration across the platform.
 
-#### Tasks and Goals
+#### Tasks and goals
 
-* **Register new model**: Add a model to enable advanced functionality.  
+* **Register new LLM**: Add an LLM to enable advanced functionality.  
 Registering a Llama 3.3 model enables on-prem generation, enhancing platform 
 flexibility and supporting advanced customer use cases, which drives adoption.
 * **Save configuration**: Store model details for immediate global availability.  
@@ -127,6 +127,53 @@ and avoiding costly errors for enterprises.
 ### Actions
 
 * Click **Save** to register or **Cancel** to discard.
+
+## Storage
+
+The **Storage** section provides insight into cluster-wide and tenant-level 
+storage metrics.
+
+### Cluster Status
+
+Cluster-level metrics help assess overall system health and utilization trends, 
+which are critical for capacity planning and ensuring performance consistency.
+
+- **Cluster name**: Displays the name of the current cluster (`Vectara`).
+- **Nodes**: Displays the number of active nodes in the cluster.
+- **Memory Usage**: Shows memory usage (9.7 GiB / 15.0 GiB).
+- **Storage Usage**: Displays disk usage (317.5 GiB / 1.3 TiB).
+
+### Customer Usage
+
+High-level usage metrics across all customers provide visibility into adoption, 
+storage behavior, and ingestion scale. These insights support decisions about 
+infrastructure provisioning, account planning, and tenant engagement.
+
+
+- **Total Size**: 3.08 GiB (3.8B characters).
+- **Total Metadata**: 4.47 GiB.
+- **Total Customers**: 348.
+- **Total Documents**: 849,263.
+
+### Table Columns
+
+The detailed table helps administrators identify anomalies or heavy users at a 
+glance. This visibility supports performance optimization, cost forecasting, 
+and strategic customer engagement.
+
+- **Customer ID**
+- **Size (Bytes)**
+- **Size (Characters)**
+- **Metadata (Bytes)**
+- **Documents**
+
+Use the search bar to filter results by **Customer ID**, and paginate results 
+using the **Previous** and **Next** navigation buttons.
+
+
+
+
+## Report an issue
 
 The Vectara Admin Center lets you submit technical issues or UI problems to the 
 Vectara support team. This function enhances issue resolution speed, and 
@@ -150,3 +197,6 @@ expected outcomes, and reproduction steps to assist Vectara in rapid diagnostics
     * Context
 3. Click **Download Report** to export the bug report file.
 4. Email this file to support@vectara.com
+
+
+
