@@ -8,7 +8,7 @@ import CodePanel from '@site/src/theme/CodePanel';
 
 Lambda Tools enable you to create custom Python functions that your agents can 
 execute during conversations. These user-defined functions run in secure, 
-sandboxed environments with resource limits, allowing you to extend agent 
+sandboxed environments, allowing you to extend agent 
 capabilities with custom business logic, data processing, or integrations.
 
 Lambda Tools are user-defined functions that:
@@ -22,8 +22,8 @@ Lambda Tools are user-defined functions that:
 - Provide **complete audit trails** of execution history.
 
 :::tip Note
-Lambda Tools run with no network access, read-only file system access, and 
-cannot install custom packages. This ensures secure execution in multi-tenant 
+Lambda Tools run **without** network access. You have read-only file system access, and 
+you **cannot** install custom packages. This ensures secure execution in multi-tenant 
 environments.
 :::
 
@@ -33,11 +33,11 @@ To create a Lambda Tool, review the prerequisites, define a function, and
 use the API.
 
 1. Meet the following prerequisites:
-   - Access to the Vectara API with tool creation permissions
-   - Basic Python programming knowledge
-   - An API key for authentication
-2. Define a simple function.  
-   Thie example calculates customer scores based on their activity metrics.  
+   - Access to the Vectara API with tool creation permissions.
+   - Basic Python familiarity.
+   - API key.
+2. Define a simple function. The entry point must be `process` (recommended), `main`, or `execute`.  
+   This example calculates customer scores based on their activity metrics.  
     <CodePanel
       title="customer_score_calculator.py"
       layout="stacked"
@@ -57,9 +57,9 @@ use the API.
     />
 
    :::note Notes- The function must be named `process`, `main`, or `execute`
-      - Use **type annotations** for automatic schema discovery
-      - Parameters with default values become optional in the schema
-      - Return a **JSON-serializable dictionary**
+      - Use type hints for automatic schema discovery.
+      - Parameters with default values become optional in the schema.
+      - Return a **JSON-serializable dictionary**.
    :::
    Response:
    <CodePanel
@@ -247,7 +247,7 @@ If your function has errors, the test response includes debugging information:
   ]}
 />
 
-## Advanced schema discovery with TypedDict
+## Advanced schema discovery (optional)
 
 For complex output structures, use `TypedDict` to define detailed schemas:
 
@@ -456,3 +456,22 @@ When you update the code, schemas are automatically re-discovered from the new f
     }
   ]}
 />
+
+## Use a lambda tool with an agent
+
+Use an inline configuration (point an agent to an existing tool by ID).
+
+<CodePanel
+title="Inline Lambda Tool Configuration (inside Agent)"
+layout="stacked"
+snippets={[
+  {
+    language: "json",
+    code: `{ "type": "lambda", "tool_id": "tol_abc123", "argument_override": { "customer_tier": "enterprise", "query": { "$ref": "session.metadata.search_query" } // dynamic context reference } }`
+  }  
+]}
+/>
+
+You can also create a reusable LambdaToolConfiguration you can reference 
+across multiple agents (with function_definition, argument_override, and 
+metadata). Use this for consistent, governed usage.
