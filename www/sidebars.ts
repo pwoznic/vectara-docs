@@ -281,6 +281,7 @@ const sidebars: SidebarsConfig = {
         },
         "learn/question-answer/question-answer-overview",
         "tutorials/build-a-chatbot",
+        "tutorials/build-a-financial-research-agent",
       ],
     },
     {
