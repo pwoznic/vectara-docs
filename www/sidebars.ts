@@ -656,6 +656,7 @@ const sidebars: SidebarsConfig = {
                 "api-reference/agent-apis/tool/get-tool",
                 "api-reference/agent-apis/tool/update-tool",
                 "api-reference/agent-apis/tool/delete-tool",
+                "api-reference/agent-apis/tool/create-a-lambda-tool",
               ]
             },
             {
