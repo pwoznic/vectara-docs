@@ -1,7 +1,7 @@
 ---
 id: instructions
-title: Creating instructions
-sidebar_label: Creating instructions
+title: Instructions
+sidebar_label: Instructions
 ---
 
 import CodePanel from '@site/src/theme/CodePanel';

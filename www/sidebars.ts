@@ -71,10 +71,9 @@ const sidebars: SidebarsConfig = {
       items: [
         "agent-os/agents-quickstart",
         "agent-os/instructions",
-        "agent-os/sessions",
         {
           type: "category",
-          label: "Agent tools",
+          label: "Tools",
           items: [
             "agent-os/agent-tools-overview",
             "agent-os/lambda-tools",
@@ -82,6 +81,8 @@ const sidebars: SidebarsConfig = {
             // "agent-os/subagent-tool",
           ],
         },
+        "agent-os/sessions",
+        "agent-os/guardrails",
         "search-and-retrieval/bring-your-own-llm",
       ],
     },
